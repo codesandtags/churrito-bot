@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-async function getTextCompletion() {
+async function getTextCompletion(prompt) {
     const { Configuration, OpenAIApi } = require("openai");
 
     const configuration = new Configuration({
@@ -8,9 +8,10 @@ async function getTextCompletion() {
     });
     const openai = new OpenAIApi(configuration);
 
+    console.log(`🤓 The prompt is: ${prompt}`);
     const response = await openai.createCompletion({
         model: "text-davinci-002",
-        prompt: "Today is",
+        prompt: prompt,
         temperature: 0.6,
         max_tokens: 150,
         top_p: 1,
@@ -19,8 +20,8 @@ async function getTextCompletion() {
     });
 
     console.log({
-        'data': response.data
+        ' 🤖 The data generated is: ': response.data.choices
     })
 }
 
-getTextCompletion();
+getTextCompletion('Tell me about RIC team community');

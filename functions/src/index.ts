@@ -112,3 +112,11 @@ exports.tweet = functions.https.onRequest(async (request: any, response: any) =>
 // Does not work: https://twitter.com/i/oauth2/authorize?response_type=code&client_id=NVd5Y00tQ211dE1qMVRlOUdTX3Q6MTpjaQ&redirect_uri=http%3A%2F%2F127.0.0.1%3A5000%2Fchurrito-bot%2Fus-central1%2Fcallback&state=4XnC.-lHXu_i2z6BL..jrjU0_aGcpdSB&code_challenge=Nj7oGtBnSksBKY_gF-gUWqGYzfvIGiY1E2pHOtLQbsY&code_challenge_method=s256&scope=tweet.read%20tweet.write%20users.read%20offline.access
 // Works:         https://twitter.com/i/oauth2/authorize?response_type=code&client_id=NVd5Y00tQ211dE1qMVRlOUdTX3Q6MTpjaQ&redirect_uri=https://www.example.com&scope=tweet.read%20users.read%20follows.read%20follows.write&state=state&code_challenge=challenge&code_challenge_method=plain
 // Works:         https://twitter.com/i/oauth2/authorize?response_type=code&client_id=NVd5Y00tQ211dE1qMVRlOUdTX3Q6MTpjaQ&redirect_uri=https://www.example.com&scope=tweet.read%20users.read%20follows.read%20follows.write&state=state&code_challenge=challenge&code_challenge_method=plain
+
+exports.tweetHourly = functions.pubsub
+.schedule('every 2 minutes')
+.onRun((context: any) => {
+    console.log('This will be run every 5 minutes!', context);
+    
+    return null;
+});
